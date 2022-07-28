@@ -1,5 +1,6 @@
 <?php
 
+require_once 'modelos/usuarios.modelo.php.php';
 class ControladorUsuarios
 
 {
@@ -10,6 +11,8 @@ class ControladorUsuarios
     {
 
         if (isset($_POST["ingUsuario"])) {
+
+            //echo '$_POST["ingUsuario"]';
 
             if (
                 preg_match('/^[a-zA-Z0-9]+$/', $_POST["ingUsuario"]) &&
@@ -36,7 +39,7 @@ class ControladorUsuarios
 
  //REGISTRAR FECHA PARA SABER EL ULTIMO LOGIN
 
-                    date_default_timezone_get('America/Bogota');
+                    //date_default_timezone_get('America/Bogota');
                     $fecha = date('Y-m-d');
                     $hora = date('H:i:s');
 
@@ -49,6 +52,8 @@ class ControladorUsuarios
                     $valor2 = $respuesta["id"];
 
                     $respuestaUltimoLogin = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2);
+
+                    print_r($respuestaUltimoLogin);
 
                     //if($respuestaUltimoLogin == "OK"){
                         if(isset($respuestaUltimoLogin)){
@@ -93,7 +98,7 @@ class ControladorUsuarios
 
                 if(isset($_FILES["nuevaFoto"]["tmp_name"])){
 
-                    list($ancho, $alto) = getimagessize($_FILES["nuevaFoto"]["tmp_name"]);
+                    list($ancho, $alto) = getimagesize($_FILES["nuevaFoto"]["tmp_name"]);
 
                     var_dump(getimagesize($_FILES["nuevaFoto"]["tmp_name"]));
 
@@ -114,10 +119,10 @@ class ControladorUsuarios
 
                         $origen = imagecreatefromjpeg($_FILES["nuevaFoto"]["tmp_name"]);
 
-                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                        $destino = imagecreatetruecolor($nuevoAcho, $nuevoAlto);
 
                         //imagecopyresized(dst_image, src_image, dst_x, dst_y, scr_x, src_y, dst_w, dst_h, src_w, src_h);
-                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho , $nuevoAlto, $ancho , $alto);
+                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAcho , $nuevoAlto, $ancho , $alto);
 
                         imagejpeg($destino, $ruta);
 
@@ -131,10 +136,10 @@ class ControladorUsuarios
 
                         $origen = imagecreatefrompng($_FILES["nuevaFoto"]["tmp_name"]);
 
-                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                        $destino = imagecreatetruecolor($nuevoAcho, $nuevoAlto);
 
                         //imagecopyresized(dst_image, src_image, dst_x, dst_y, scr_x, src_y, dst_w, dst_h, src_w, src_h);
-                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho , $nuevoAlto, $ancho , $alto);
+                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAcho , $nuevoAlto, $ancho , $alto);
 
                         imagepng($destino, $ruta);
 
@@ -148,7 +153,7 @@ class ControladorUsuarios
 
                     if(isset($_FILES["editarFoto"]["tmp_name"]) && !empty($_FILES["editarFoto"]["tmp_name"])){
     
-                        list($ancho, $alto) = getimagessize($_FILES["editarFoto"]["tmp_name"]);
+                        list($ancho, $alto) = getimagesize($_FILES["editarFoto"]["tmp_name"]);
     
                         $nuevoAcho = 500;
                         $nuevoAlto = 500;
@@ -177,9 +182,9 @@ class ControladorUsuarios
 
                         $origen = imagecreatefromjpeg($_FILES["editarFoto"]["tmp_name"]);
 
-                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                        $destino = imagecreatetruecolor($nuevoAcho, $nuevoAlto);
 
-                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho , $nuevoAlto, $ancho , $alto);
+                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAcho , $nuevoAlto, $ancho , $alto);
 
                         imagejpeg($destino, $ruta);
 
@@ -193,9 +198,9 @@ class ControladorUsuarios
 
                         $origen = imagecreatefrompng($_FILES["editarFoto"]["tmp_name"]);
 
-                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                        $destino = imagecreatetruecolor($nuevoAcho, $nuevoAlto);
 
-                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho , $nuevoAlto, $ancho , $alto);
+                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAcho , $nuevoAlto, $ancho , $alto);
 
                         imagepng($destino, $ruta);
 
@@ -213,7 +218,7 @@ class ControladorUsuarios
                               "perfil" => $_POST["nuevoPerfil"],
                               "foto" => $ruta);
 
-                  $respuesta = ModeloUsuario::mdlIngresarUsuario($tabla, $datos);
+                  $respuesta = ModeloUsuarios::mdlIngresarUsuario($tabla, $datos);
 
               $tabla = "usuarios";
 
@@ -222,7 +227,7 @@ class ControladorUsuarios
                               "password" => $_POST["nuevoPassword"],
                               "perfil" => $_POST["nuevoPerfil"]);
 
-              $respuesta = ModeloUsuarios::mdlIngresarUsuarios($tabla, $datos);
+              $respuesta = ModeloUsuarios::mdlIngresarUsuario($tabla, $datos);
               
               if($respuesta == "OK"){
 
@@ -287,7 +292,8 @@ class ControladorUsuarios
 
                     }else{
 
-                        $encriptar = $passwordActual;
+                        //$encriptar = $passwordActual;
+                        $encriptar = $_POST["passwordActual"];
 
                     }       
 
