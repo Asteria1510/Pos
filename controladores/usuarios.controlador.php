@@ -37,7 +37,7 @@ class ControladorUsuarios
                     $_SESSION["foto"] = $respuesta ["foto"];
                     $_SESSION["perfil"] = $respuesta ["perfil"];
 
- //REGISTRAR FECHA PARA SABER EL ULTIMO LOGIN
+ //REGISTRAR FECHA PARA SABER EL ÚLTIMO LOGIN
 
                     //date_default_timezone_get('America/Bogota');
                     $fecha = date('Y-m-d');
@@ -98,7 +98,7 @@ class ControladorUsuarios
 
                 if(isset($_FILES["nuevaFoto"]["tmp_name"])){
 
-                    list($ancho, $alto) = getimagesize($_FILES["nuevaFoto"]["tmp_name"]);
+                    list($acho, $alto) = getimagesize($_FILES["nuevaFoto"]["tmp_name"]);
 
                     var_dump(getimagesize($_FILES["nuevaFoto"]["tmp_name"]));
 

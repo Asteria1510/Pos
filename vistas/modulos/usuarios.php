@@ -99,7 +99,7 @@
 
                                    <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fa fa-pencil"></i></button>
 
-                                   <button class="btn btn-danger btnEliminarUsuario" idUsuario="'.$value["id"].'" fotoUsuario="'.$value["foto"].'" usuario="'.$value["usario"].'"><i class="fa fa-times"></i></button>
+                                   <button class="btn btn-danger btnEliminarUsuario" idUsuario="'.$value["id"].'" fotoUsuario="'.$value["foto"].'" usuario="'.$value["usuario"].'"><i class="fa fa-times"></i></button>
 
                                </div>
 
@@ -269,7 +269,7 @@
                             <div class="input-group">
 
                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                <input type="text" class="form-control input-lg" id="ditarNombre" name="editarNombre" value="" require>
+                                <input type="text" class="form-control input-lg" id="editarNombre" name="editarNombre" value="" require>
 
                             </div>
 
